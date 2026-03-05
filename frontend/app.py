@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 # ------------------------------------------------
 # Page config
 # ------------------------------------------------
-
+API_URL = "https://happinessbot.onrender.com"
 st.set_page_config(
     page_title="Couple Compatibility Analyzer",
     page_icon="💑",
@@ -166,7 +166,7 @@ if st.session_state.step == "RESULT" and not st.session_state.results:
     overall = sum(compatibility_scores)/(len(compatibility_scores)*5)*100
 
     response = requests.post(
-        "http://127.0.0.1:8000/submit",
+        f"{API_URL}/submit",
         json={"answers":compatibility_scores}
     )
 
@@ -363,7 +363,7 @@ if st.session_state.results:
                 st.markdown(user_input)
 
             response = requests.post(
-                "http://127.0.0.1:8000/chat",
+                f"{API_URL}/chat",
                 json={
                     "message": user_input,
                     "scores": scores,
